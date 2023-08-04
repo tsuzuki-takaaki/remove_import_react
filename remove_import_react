@@ -1,0 +1,11 @@
+#!/bin/bash
+
+TARGET_STRING="import React from 'react'"
+
+for target in $(git grep -l "${TARGET_STRING}")
+do
+    TEMP=$(mktemp)
+    grep -v "${TARGET_STRING}" "${target}" > "${TEMP}"
+
+    mv "${TEMP}" "${target}"
+done

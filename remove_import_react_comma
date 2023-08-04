@@ -1,0 +1,11 @@
+#!/bin/bash
+
+TARGET_STRING="React, "
+
+for target in $(git grep -l "${TARGET_STRING}")
+do
+    TEMP=$(mktemp)
+    sed "s/${TARGET_STRING}//g" "${target}" > "${TEMP}"
+
+    mv "${TEMP}" "${target}"
+done
